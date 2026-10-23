@@ -1,546 +1,874 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#51246a">
+  <title>SafeHaven | Safety & Support</title>
 
-    <title>SafeHaven</title>
+  <style>
+    :root {
+      --purple: #51246a;
+      --purple-dark: #351344;
+      --purple-light: #f3eafa;
+      --pink: #f3dce9;
+      --white: #ffffff;
+      --background: #f8f6fa;
+      --text: #282330;
+      --muted: #6d6674;
+      --border: #e8e1ec;
+      --red: #b42332;
+      --green: #23784b;
+      --radius: 18px;
+    }
 
-    <style>
+    * {
+      box-sizing: border-box;
+    }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
+    html {
+      scroll-behavior: smooth;
+    }
 
-        body {
-            background: #f5f7fb;
-            color: #222;
-        }
+    body {
+      margin: 0;
+      background: var(--background);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.5;
+    }
 
-        /* HEADER */
+    button, input, select, textarea {
+      font: inherit;
+    }
 
-        header {
-            background: #4b1f6f;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
+    button, a {
+      -webkit-tap-highlight-color: transparent;
+    }
 
-        header h1 {
-            font-size: 28px;
-        }
+    button {
+      cursor: pointer;
+    }
 
-        header p {
-            margin-top: 5px;
-            opacity: 0.9;
-        }
+    a {
+      color: var(--purple);
+    }
 
-        /* MAIN */
+    button:focus-visible, a:focus-visible,
+    input:focus-visible, textarea:focus-visible,
+    select:focus-visible {
+      outline: 3px solid #b78cce;
+      outline-offset: 3px;
+    }
 
-        .container {
-            max-width: 900px;
-            margin: auto;
-            padding: 25px;
-        }
+    .topbar {
+      background: var(--purple-dark);
+      color: white;
+      padding: 12px 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
 
-        /* EMERGENCY SECTION */
+    .brand {
+      color: white;
+      font-size: 1.2rem;
+      font-weight: 800;
+      text-decoration: none;
+      letter-spacing: .2px;
+    }
 
-        .emergency {
-            background: #8b0000;
-            color: white;
-            padding: 25px;
-            border-radius: 15px;
-            text-align: center;
-            margin-bottom: 25px;
-        }
+    .brand span {
+      color: #e9c8fa;
+    }
 
-        .emergency h2 {
-            margin-bottom: 10px;
-        }
+    .exit-button {
+      background: transparent;
+      border: 1px solid #e7d5ef;
+      color: white;
+      border-radius: 9px;
+      padding: 8px 12px;
+      font-size: .88rem;
+    }
 
-        .emergency button {
-            background: white;
-            color: #8b0000;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 30px;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 15px;
-        }
+    .exit-button:hover {
+      background: #ffffff1a;
+    }
 
-        .emergency button:hover {
-            background: #eee;
-        }
+    .hero {
+      background: linear-gradient(135deg, #51246a, #75428d);
+      color: white;
+      padding: 36px 20px 42px;
+    }
 
-        /* QUICK ACTIONS */
+    .hero-inner {
+      max-width: 980px;
+      margin: auto;
+    }
 
-        .actions {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 15px;
-            margin-bottom: 30px;
-        }
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 1.6px;
+      font-size: .75rem;
+      font-weight: 700;
+      color: #ead9f4;
+    }
 
-        .card {
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-            cursor: pointer;
-            transition: 0.2s;
-        }
+    .hero h1 {
+      font-size: clamp(2rem, 6vw, 3.2rem);
+      line-height: 1.1;
+      margin: 12px 0;
+    }
 
-        .card:hover {
-            transform: translateY(-3px);
-        }
+    .hero p {
+      max-width: 580px;
+      color: #f3eaf8;
+      margin-bottom: 24px;
+    }
 
-        .card .icon {
-            font-size: 35px;
-            margin-bottom: 10px;
-        }
+    .emergency-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: white;
+      color: var(--red);
+      border: 0;
+      border-radius: 14px;
+      padding: 16px 22px;
+      font-weight: 800;
+      box-shadow: 0 5px 18px #210d3030;
+    }
 
-        .card h3 {
-            margin-bottom: 8px;
-        }
+    .emergency-button:hover {
+      background: #fff0f1;
+    }
 
-        .card p {
-            font-size: 14px;
-            color: #666;
-        }
+    .hero-note {
+      font-size: .83rem;
+      margin-top: 12px;
+      color: #f0e4f5;
+    }
 
-        /* SECTIONS */
+    main {
+      max-width: 980px;
+      margin: auto;
+      padding: 26px 18px 48px;
+    }
 
-        .section {
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
-            margin-bottom: 20px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-        }
+    .section-heading {
+      margin: 10px 0 18px;
+    }
 
-        .section h2 {
-            color: #4b1f6f;
-            margin-bottom: 15px;
-        }
+    .section-heading h2 {
+      color: var(--purple-dark);
+      font-size: 1.35rem;
+      margin-bottom: 4px;
+    }
 
-        /* REPORT FORM */
+    .section-heading p {
+      color: var(--muted);
+      font-size: .93rem;
+      margin-top: 0;
+    }
 
-        input,
-        textarea,
-        select {
-            width: 100%;
-            padding: 12px;
-            margin-top: 8px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-        }
+    .action-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 32px;
+    }
 
-        textarea {
-            min-height: 120px;
-        }
+    .action-card {
+      text-align: left;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 16px;
+      min-height: 156px;
+      color: var(--text);
+      box-shadow: 0 3px 12px #39204808;
+      transition: transform .15s, border-color .15s;
+    }
 
-        .submit-btn {
-            background: #4b1f6f;
-            color: white;
-            border: none;
-            padding: 13px 25px;
-            border-radius: 8px;
-            cursor: pointer;
-        }
+    .action-card:hover {
+      transform: translateY(-2px);
+      border-color: #c7a9d8;
+    }
 
-        /* FOOTER */
+    .action-icon {
+      display: grid;
+      place-items: center;
+      background: var(--purple-light);
+      border-radius: 12px;
+      width: 44px;
+      height: 44px;
+      font-size: 1.4rem;
+      margin-bottom: 12px;
+    }
 
-        footer {
-            text-align: center;
-            padding: 25px;
-            color: #666;
-            font-size: 14px;
-        }
+    .action-card strong {
+      display: block;
+      font-size: 1rem;
+      margin-bottom: 5px;
+    }
 
-        /* QUICK EXIT */
+    .action-card p {
+      color: var(--muted);
+      font-size: .86rem;
+      margin: 0;
+    }
 
-        .exit {
-            position: fixed;
-            top: 15px;
-            right: 15px;
-            background: #222;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 8px;
-            cursor: pointer;
-        }
+    .panel {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+      margin-bottom: 20px;
+      scroll-margin-top: 18px;
+    }
 
-    </style>
+    .panel h2 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      color: var(--purple-dark);
+    }
+
+    .panel-intro {
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .contact {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 14px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+
+    .contact strong {
+      display: block;
+    }
+
+    .contact small {
+      display: block;
+      color: var(--muted);
+      margin-top: 3px;
+    }
+
+    .small-button, .primary-button, .secondary-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-weight: 700;
+      border: 1px solid transparent;
+    }
+
+    .small-button, .primary-button {
+      background: var(--purple);
+      color: white;
+    }
+
+    .small-button:hover, .primary-button:hover {
+      background: var(--purple-dark);
+    }
+
+    .secondary-button {
+      background: white;
+      color: var(--purple);
+      border-color: #cdb9d9;
+    }
+
+    .secondary-button:hover {
+      background: var(--purple-light);
+    }
+
+    .form-field {
+      margin: 16px 0;
+    }
+
+    .form-field label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .form-field input,
+    .form-field select,
+    .form-field textarea {
+      width: 100%;
+      border: 1px solid #d8cfde;
+      border-radius: 10px;
+      padding: 12px;
+      background: white;
+      color: var(--text);
+    }
+
+    .form-field textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .privacy-note {
+      background: #f6f0fa;
+      border-left: 4px solid var(--purple);
+      border-radius: 8px;
+      padding: 12px 14px;
+      color: #4e3c58;
+      font-size: .88rem;
+      margin: 14px 0;
+    }
+
+    .notice {
+      background: #edf7f0;
+      color: #205b3c;
+      padding: 12px 14px;
+      border-radius: 10px;
+      margin-top: 14px;
+    }
+
+    .support-item {
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .support-item:last-child {
+      border-bottom: 0;
+    }
+
+    .support-item h3 {
+      font-size: 1rem;
+      margin: 0 0 5px;
+    }
+
+    .support-item p {
+      margin: 0 0 9px;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .guidance-list {
+      padding-left: 20px;
+    }
+
+    .guidance-list li {
+      margin: 10px 0;
+    }
+
+    .footer {
+      background: var(--purple-dark);
+      color: #eee1f5;
+      padding: 24px 18px;
+      text-align: center;
+      font-size: .86rem;
+    }
+
+    .footer p {
+      margin: 5px 0;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .quick-exit-screen {
+      min-height: 100vh;
+      background: #f5f5f5;
+      color: #333;
+      padding: 30px 20px;
+    }
+
+    .quick-exit-screen .neutral-card {
+      max-width: 620px;
+      margin: 40px auto;
+      background: white;
+      padding: 28px;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+    }
+
+    @media (min-width: 700px) {
+      .action-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .hero {
+        padding-top: 48px;
+        padding-bottom: 52px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .topbar {
+        padding: 10px 12px;
+      }
+
+      .brand {
+        font-size: 1.05rem;
+      }
+
+      .exit-button {
+        padding: 7px 9px;
+      }
+
+      .contact {
+        align-items: flex-start;
+      }
+
+      .contact .small-button {
+        padding: 9px;
+      }
+
+      .panel {
+        padding: 17px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *, *::before, *::after {
+        transition: none !important;
+      }
+    }
+  </style>
 </head>
 
 <body>
+  <div id="app">
+    <header class="topbar">
+      <a class="brand" href="#home" aria-label="SafeHaven home">
+        🛡️ Safe<span>Haven</span>
+      </a>
+      <button class="exit-button" id="quickExit" type="button">
+        Quick Exit ↗
+      </button>
+    </header>
 
-<button class="exit" onclick="quickExit()">Quick Exit</button>
-
-<header>
-
-    <h1>🛡️ SafeHaven</h1>
-
-    <p>
-        Safety, support and trusted help when you need it.
-    </p>
-
-</header>
-
-
-<div class="container">
-
-
-    <!-- EMERGENCY -->
-
-    <section class="emergency">
-
-        <h2>Are you in immediate danger?</h2>
-
+    <section class="hero" id="home">
+      <div class="hero-inner">
+        <div class="eyebrow">Your safety matters</div>
+        <h1>You deserve to feel safe.</h1>
         <p>
-            Get emergency assistance or contact someone you trust.
+          Find support, reach someone you trust and explore practical
+          safety resources. You are in control of what you share.
         </p>
-
-        <button onclick="emergencyHelp()">
-            🚨 GET HELP NOW
+        <button class="emergency-button" id="emergencyButton" type="button">
+          <span aria-hidden="true">🚨</span>
+          GET EMERGENCY HELP
         </button>
-
+        <div class="hero-note">
+          If you are in immediate danger, move to a safer place if possible
+          and contact emergency services.
+        </div>
+      </div>
     </section>
 
-
-    <!-- QUICK ACTIONS -->
-
-    <div class="actions">
-
-        <div class="card" onclick="showSupport()">
-
-            <div class="icon">📞</div>
-
-            <h3>Get Support</h3>
-
-            <p>
-                Find trusted support services.
-            </p>
-
+    <main>
+      <section aria-labelledby="actionsHeading">
+        <div class="section-heading">
+          <h2 id="actionsHeading">How can we help?</h2>
+          <p>Choose the option that feels right for you.</p>
         </div>
 
+        <div class="action-grid">
+          <button class="action-card" type="button" data-target="support">
+            <span class="action-icon" aria-hidden="true">📞</span>
+            <strong>Find Support</strong>
+            <p>Explore emergency and GBV support resources.</p>
+          </button>
 
-        <div class="card" onclick="showSafePlaces()">
+          <button class="action-card" type="button" data-target="contacts">
+            <span class="action-icon" aria-hidden="true">👥</span>
+            <strong>Trusted Contacts</strong>
+            <p>Choose someone you trust to contact.</p>
+          </button>
 
-            <div class="icon">📍</div>
+          <button class="action-card" type="button" data-target="incident">
+            <span class="action-icon" aria-hidden="true">📝</span>
+            <strong>Document an Incident</strong>
+            <p>Prepare a private note on what happened.</p>
+          </button>
 
-            <h3>Safe Places</h3>
+          <button class="action-card" type="button" data-target="safePlaces">
+            <span class="action-icon" aria-hidden="true">📍</span>
+            <strong>Find Safe Places</strong>
+            <p>Look for relevant support in your area.</p>
+          </button>
 
-            <p>
-                Find nearby places where you can get help.
-            </p>
+          <button class="action-card" type="button" data-target="guidance">
+            <span class="action-icon" aria-hidden="true">💜</span>
+            <strong>Safety Guidance</strong>
+            <p>Explore practical steps and ways to support others.</p>
+          </button>
 
+          <button class="action-card" type="button" data-target="privacy">
+            <span class="action-icon" aria-hidden="true">🔐</span>
+            <strong>Privacy & Safety</strong>
+            <p>Understand what this prototype does with your information.</p>
+          </button>
         </div>
+      </section>
 
-
-        <div class="card" onclick="showContacts()">
-
-            <div class="icon">👥</div>
-
-            <h3>Trusted Contacts</h3>
-
-            <p>
-                Contact people you trust.
-            </p>
-
-        </div>
-
-
-        <div class="card" onclick="showReport()">
-
-            <div class="icon">📝</div>
-
-            <h3>Report Incident</h3>
-
-            <p>
-                Document an incident safely.
-            </p>
-
-        </div>
-
-    </div>
-
-
-    <!-- SUPPORT -->
-
-    <section class="section" id="support">
-
-        <h2>Trusted Support</h2>
-
-        <p>
-            SafeHaven helps you find trusted organisations and
-            services that can provide support.
+      <section class="panel" id="support">
+        <h2>📞 Emergency and support resources</h2>
+        <p class="panel-intro">
+          These South African contact numbers are provided as a starting
+          point. Confirm services and availability before relying on them.
         </p>
 
-        <br>
+        <div class="support-item">
+          <h3>Emergency from a mobile phone</h3>
+          <p>Use 112 for mobile emergency assistance in South Africa.</p>
+          <a class="small-button" href="tel:112">Call 112</a>
+        </div>
 
-        <p>📞 Emergency assistance</p>
+        <div class="support-item">
+          <h3>South African Police Service</h3>
+          <p>10111 — police emergency number.</p>
+          <a class="small-button" href="tel:10111">Call 10111</a>
+        </div>
 
-        <p>🏥 Healthcare and medical support</p>
+        <div class="support-item">
+          <h3>Ambulance services</h3>
+          <p>10177 — ambulance emergency number.</p>
+          <a class="small-button" href="tel:10177">Call 10177</a>
+        </div>
 
-        <p>👮 Police and law enforcement</p>
+        <div class="support-item">
+          <h3>GBV Command Centre</h3>
+          <p>
+            South Africa's GBV Command Centre has used the toll-free
+            number 0800 428 428. Verify current availability and contact
+            details through official government channels.
+          </p>
+          <a class="small-button" href="tel:0800428428">Call 0800 428 428</a>
+        </div>
 
-        <p>🏠 Shelter and safe accommodation</p>
+        <div class="privacy-note">
+          SafeHaven is not an emergency dispatch service. Pressing a call
+          button opens your device's calling app where supported; you must
+          complete the call yourself.
+        </div>
+      </section>
 
-        <p>💬 Counselling and emotional support</p>
-
-    </section>
-
-
-    <!-- SAFE PLACES -->
-
-    <section class="section" id="places">
-
-        <h2>Safe Places</h2>
-
-        <p>
-            In the full version, SafeHaven will use your location
-            to identify nearby verified support locations.
+      <section class="panel" id="contacts">
+        <h2>👥 Trusted contacts</h2>
+        <p class="panel-intro">
+          Add someone you feel safe contacting. Contact details are kept
+          only in this page's current session and are not sent to a server.
         </p>
 
-        <br>
+        <form id="contactForm">
+          <div class="form-field">
+            <label for="contactName">Contact's name</label>
+            <input id="contactName" name="contactName" maxlength="80"
+                   autocomplete="off" required>
+          </div>
 
-        <button class="submit-btn" onclick="findLocation()">
-            📍 Find Nearby Help
+          <div class="form-field">
+            <label for="contactPhone">Phone number</label>
+            <input id="contactPhone" name="contactPhone" type="tel"
+                   maxlength="25" autocomplete="off" required>
+          </div>
+
+          <button class="primary-button" type="submit">Add contact</button>
+        </form>
+
+        <div class="contact-list" id="contactList" aria-live="polite">
+          <p class="panel-intro">No contacts added in this session yet.</p>
+        </div>
+
+        <div class="privacy-note">
+          Only add a person you trust. This prototype does not automatically
+          notify contacts or send your location.
+        </div>
+      </section>
+
+      <section class="panel" id="incident">
+        <h2>📝 Document an incident</h2>
+        <p class="panel-intro">
+          You can draft a note for your own use or to discuss with a
+          support professional when you feel ready.
+        </p>
+
+        <div class="privacy-note">
+          For your safety, do not enter real names, addresses or sensitive
+          incident details into this demo. The form below does not save
+          information after you leave or refresh the page.
+        </div>
+
+        <form id="incidentForm">
+          <div class="form-field">
+            <label for="incidentType">Type of incident</label>
+            <select id="incidentType" required>
+              <option value="">Select an option</option>
+              <option>Verbal or emotional abuse</option>
+              <option>Physical violence</option>
+              <option>Sexual violence</option>
+              <option>Harassment or stalking</option>
+              <option>Economic abuse</option>
+              <option>Other safety concern</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label for="incidentDate">Date of incident (optional)</label>
+            <input id="incidentDate" type="date">
+          </div>
+
+          <div class="form-field">
+            <label for="incidentDescription">Notes (demo only)</label>
+            <textarea id="incidentDescription" maxlength="2000"
+              placeholder="Use fictional details while testing this demo."></textarea>
+          </div>
+
+          <button class="primary-button" type="submit">
+            Preview my note
+          </button>
+          <button class="secondary-button" id="clearIncident" type="button">
+            Clear form
+          </button>
+        </form>
+
+        <div id="incidentPreview" class="notice hidden" aria-live="polite"></div>
+      </section>
+
+      <section class="panel" id="safePlaces">
+        <h2>📍 Find safe places</h2>
+        <p class="panel-intro">
+          Look for hospitals, police stations, shelters and support
+          organisations near your area.
+        </p>
+        <p>
+          SafeHaven has not yet connected to a verified live directory.
+          You can use a map service to explore nearby locations.
+        </p>
+        <a class="primary-button"
+           href="https://www.google.com/maps/search/police+stations+and+hospitals+near+me/"
+           target="_blank" rel="noopener noreferrer">
+          Explore nearby services ↗
+        </a>
+        <div class="privacy-note">
+          Opening a third-party map may share information with that service
+          according to its own settings and privacy policy. Confirm a
+          shelter's address, eligibility and availability before travelling.
+        </div>
+      </section>
+
+      <section class="panel" id="guidance">
+        <h2>💜 Safety guidance</h2>
+        <ul class="guidance-list">
+          <li>If you are in immediate danger, seek emergency assistance
+              and move somewhere safer if you can do so without increasing risk.</li>
+          <li>Consider contacting someone you trust and agreeing on a
+              code word or check-in plan.</li>
+          <li>If your device may be monitored, use a safer device when
+              possible. Private browsing does not guarantee that activity
+              is hidden from every person or service.</li>
+          <li>Keep evidence only if it is safe to do so. Do not risk your
+              safety to collect it.</li>
+          <li>When supporting someone, listen without judgement, respect
+              their choices and help them access professional services
+              if they want that support.</li>
+        </ul>
+      </section>
+
+      <section class="panel" id="privacy">
+        <h2>🔐 Your privacy matters</h2>
+        <p>
+          SafeHaven is currently a demonstration prototype. It has no
+          account system, secure database, encrypted evidence storage,
+          or automatic emergency alert service.
+        </p>
+        <p>
+          Contact entries exist only while the page remains open.
+          Incident notes are previewed on the page and are not intentionally
+          stored by this code.
+        </p>
+        <p>
+          GitHub Pages serves this website publicly. Do not submit real
+          survivor information through this prototype.
+        </p>
+        <button class="secondary-button" id="privacyExit" type="button">
+          Quick Exit
         </button>
+      </section>
+    </main>
 
-        <p id="locationResult"></p>
+    <footer class="footer">
+      <p><strong>🛡️ SafeHaven</strong></p>
+      <p>Safer communities. Trusted support. Survivor-centred design.</p>
+      <p>Hackathon prototype — not a replacement for emergency services.</p>
+    </footer>
+  </div>
 
-    </section>
+  <script>
+    "use strict";
 
+    const app = document.getElementById("app");
+    const contactList = document.getElementById("contactList");
+    const contacts = [];
 
-    <!-- INCIDENT REPORT -->
-
-    <section class="section" id="report">
-
-        <h2>Document an Incident</h2>
-
-        <p>
-            Your information should remain private and should only
-            be shared when you choose to do so.
-        </p>
-
-        <br>
-
-        <label>Incident type</label>
-
-        <select id="incidentType">
-
-            <option>Verbal abuse</option>
-
-            <option>Physical violence</option>
-
-            <option>Sexual violence</option>
-
-            <option>Harassment</option>
-
-            <option>Stalking</option>
-
-            <option>Other</option>
-
-        </select>
-
-
-        <label>What happened?</label>
-
-        <textarea
-            id="incidentDescription"
-            placeholder="Describe what happened...">
-        </textarea>
-
-
-        <button class="submit-btn" onclick="saveReport()">
-            Save Incident
-        </button>
-
-    </section>
-
-
-    <!-- SAFETY EDUCATION -->
-
-    <section class="section">
-
-        <h2>Safety Information</h2>
-
-        <p>
-            If you or someone else is in immediate danger,
-            seek emergency assistance.
-        </p>
-
-        <br>
-
-        <p>
-            Do not confront an abuser if doing so could put you
-            or another person at greater risk.
-        </p>
-
-        <br>
-
-        <p>
-            When possible, keep important evidence and document
-            incidents in a secure location.
-        </p>
-
-    </section>
-
-</div>
-
-
-<footer>
-
-    <p>
-        SafeHaven — Technology for safer communities.
-    </p>
-
-    <p>
-        Privacy-first • Discreet • Community-focused
-    </p>
-
-</footer>
-
-
-<script>
-
-    function emergencyHelp() {
-
-        alert(
-            "Emergency assistance selected.\n\n" +
-            "The full SafeHaven app will connect you to " +
-            "appropriate emergency services and trusted contacts."
-        );
-
+    function scrollToSection(id) {
+      const section = document.getElementById(id);
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
     }
 
+    document.querySelectorAll("[data-target]").forEach((button) => {
+      button.addEventListener("click", () => {
+        scrollToSection(button.dataset.target);
+      });
+    });
 
-    function showSupport() {
+    document.getElementById("emergencyButton").addEventListener("click", () => {
+      const choice = window.confirm(
+        "If you are in immediate danger, call emergency services.\n\n" +
+        "Press OK to open the mobile emergency number 112, " +
+        "or Cancel to view the support options on this page."
+      );
 
-        document
-            .getElementById("support")
-            .scrollIntoView({
-                behavior: "smooth"
-            });
+      if (choice) {
+        window.location.href = "tel:112";
+      } else {
+        scrollToSection("support");
+      }
+    });
 
+    function renderContacts() {
+      contactList.replaceChildren();
+
+      if (contacts.length === 0) {
+        const empty = document.createElement("p");
+        empty.className = "panel-intro";
+        empty.textContent = "No contacts added in this session yet.";
+        contactList.appendChild(empty);
+        return;
+      }
+
+      contacts.forEach((contact, index) => {
+        const item = document.createElement("div");
+        item.className = "contact";
+
+        const details = document.createElement("div");
+        const name = document.createElement("strong");
+        name.textContent = contact.name;
+        const phone = document.createElement("small");
+        phone.textContent = contact.phone;
+        details.append(name, phone);
+
+        const call = document.createElement("a");
+        call.className = "small-button";
+        call.href = "tel:" + contact.phone.replace(/[^\d+]/g, "");
+        call.textContent = "Call";
+        call.setAttribute("aria-label", "Call " + contact.name);
+
+        const remove = document.createElement("button");
+        remove.type = "button";
+        remove.className = "secondary-button";
+        remove.textContent = "Remove";
+        remove.addEventListener("click", () => {
+          contacts.splice(index, 1);
+          renderContacts();
+        });
+
+        const actions = document.createElement("div");
+        actions.style.display = "flex";
+        actions.style.flexWrap = "wrap";
+        actions.style.gap = "6px";
+        actions.append(call, remove);
+
+        item.append(details, actions);
+        contactList.appendChild(item);
+      });
     }
 
+    document.getElementById("contactForm").addEventListener("submit", (event) => {
+      event.preventDefault();
 
-    function showSafePlaces() {
+      const name = document.getElementById("contactName").value.trim();
+      const phone = document.getElementById("contactPhone").value.trim();
 
-        document
-            .getElementById("places")
-            .scrollIntoView({
-                behavior: "smooth"
-            });
+      if (!name || !phone || !/[0-9]{5,}/.test(phone.replace(/\D/g, ""))) {
+        window.alert("Enter a name and a valid phone number.");
+        return;
+      }
 
-    }
+      contacts.push({ name, phone });
+      event.target.reset();
+      renderContacts();
+      window.alert(
+        "Contact added for this session only. No message or alert was sent."
+      );
+    });
 
+    document.getElementById("incidentForm").addEventListener("submit", (event) => {
+      event.preventDefault();
 
-    function showReport() {
+      const type = document.getElementById("incidentType").value;
+      const date = document.getElementById("incidentDate").value;
+      const description =
+        document.getElementById("incidentDescription").value.trim();
 
-        document
-            .getElementById("report")
-            .scrollIntoView({
-                behavior: "smooth"
-            });
+      const preview = document.getElementById("incidentPreview");
+      preview.replaceChildren();
 
-    }
+      const heading = document.createElement("strong");
+      heading.textContent = "Demo note preview";
 
+      const details = document.createElement("p");
+      details.textContent =
+        "Type: " + type +
+        (date ? " | Date: " + date : "") +
+        (description ? " | Notes: " + description : "");
 
-    function showContacts() {
+      const warning = document.createElement("p");
+      warning.textContent =
+        "This is only a temporary on-screen preview. It has not been " +
+        "sent to a support service or saved to a secure database.";
 
-        alert(
-            "Trusted Contacts\n\n" +
-            "The full version will allow users to " +
-            "securely add and contact trusted people."
-        );
+      preview.append(heading, details, warning);
+      preview.classList.remove("hidden");
+    });
 
-    }
-
-
-    function findLocation() {
-
-        const result =
-            document.getElementById("locationResult");
-
-        if (navigator.geolocation) {
-
-            navigator.geolocation.getCurrentPosition(
-
-                function(position) {
-
-                    result.innerHTML =
-                        "<br>📍 Location detected.<br>" +
-                        "The full version will display " +
-                        "verified support services near you.";
-
-                },
-
-                function() {
-
-                    result.innerHTML =
-                        "<br>Location access was not granted.";
-
-                }
-
-            );
-
-        } else {
-
-            result.innerHTML =
-                "<br>Location services are not supported.";
-
-        }
-
-    }
-
-
-    function saveReport() {
-
-        const type =
-            document.getElementById("incidentType").value;
-
-        const description =
-            document.getElementById("incidentDescription").value;
-
-        if (description.trim() === "") {
-
-            alert(
-                "Please provide a description before saving."
-            );
-
-            return;
-
-        }
-
-        alert(
-            "Incident recorded locally.\n\n" +
-            "Type: " + type +
-            "\n\nYour information should remain private."
-        );
-
-    }
-
+    document.getElementById("clearIncident").addEventListener("click", () => {
+      document.getElementById("incidentForm").reset();
+      const preview = document.getElementById("incidentPreview");
+      preview.replaceChildren();
+      preview.classList.add("hidden");
+    });
 
     function quickExit() {
+      const leave = window.confirm(
+        "Leave SafeHaven and open a neutral page? " +
+        "This will not erase your browser history or guarantee privacy."
+      );
 
-        window.location.href =
-            "https://www.google.com";
-
+      if (leave) {
+        window.location.replace("https://www.google.com/");
+      }
     }
 
-</script>
-
+    document.getElementById("quickExit").addEventListener("click", quickExit);
+    document.getElementById("privacyExit").addEventListener("click", quickExit);
+  </script>
 </body>
 </html>
