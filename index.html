@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SafeHaven</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f7fb;
+            color: #222;
+        }
+
+        /* HEADER */
+
+        header {
+            background: #4b1f6f;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 28px;
+        }
+
+        header p {
+            margin-top: 5px;
+            opacity: 0.9;
+        }
+
+        /* MAIN */
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 25px;
+        }
+
+        /* EMERGENCY SECTION */
+
+        .emergency {
+            background: #8b0000;
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .emergency h2 {
+            margin-bottom: 10px;
+        }
+
+        .emergency button {
+            background: white;
+            color: #8b0000;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        .emergency button:hover {
+            background: #eee;
+        }
+
+        /* QUICK ACTIONS */
+
+        .actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+        }
+
+        .card .icon {
+            font-size: 35px;
+            margin-bottom: 10px;
+        }
+
+        .card h3 {
+            margin-bottom: 8px;
+        }
+
+        .card p {
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* SECTIONS */
+
+        .section {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+
+        .section h2 {
+            color: #4b1f6f;
+            margin-bottom: 15px;
+        }
+
+        /* REPORT FORM */
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px;
+            margin-top: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        textarea {
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            background: #4b1f6f;
+            color: white;
+            border: none;
+            padding: 13px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        /* FOOTER */
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* QUICK EXIT */
+
+        .exit {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            background: #222;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<button class="exit" onclick="quickExit()">Quick Exit</button>
+
+<header>
+
+    <h1>🛡️ SafeHaven</h1>
+
+    <p>
+        Safety, support and trusted help when you need it.
+    </p>
+
+</header>
+
+
+<div class="container">
+
+
+    <!-- EMERGENCY -->
+
+    <section class="emergency">
+
+        <h2>Are you in immediate danger?</h2>
+
+        <p>
+            Get emergency assistance or contact someone you trust.
+        </p>
+
+        <button onclick="emergencyHelp()">
+            🚨 GET HELP NOW
+        </button>
+
+    </section>
+
+
+    <!-- QUICK ACTIONS -->
+
+    <div class="actions">
+
+        <div class="card" onclick="showSupport()">
+
+            <div class="icon">📞</div>
+
+            <h3>Get Support</h3>
+
+            <p>
+                Find trusted support services.
+            </p>
+
+        </div>
+
+
+        <div class="card" onclick="showSafePlaces()">
+
+            <div class="icon">📍</div>
+
+            <h3>Safe Places</h3>
+
+            <p>
+                Find nearby places where you can get help.
+            </p>
+
+        </div>
+
+
+        <div class="card" onclick="showContacts()">
+
+            <div class="icon">👥</div>
+
+            <h3>Trusted Contacts</h3>
+
+            <p>
+                Contact people you trust.
+            </p>
+
+        </div>
+
+
+        <div class="card" onclick="showReport()">
+
+            <div class="icon">📝</div>
+
+            <h3>Report Incident</h3>
+
+            <p>
+                Document an incident safely.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- SUPPORT -->
+
+    <section class="section" id="support">
+
+        <h2>Trusted Support</h2>
+
+        <p>
+            SafeHaven helps you find trusted organisations and
+            services that can provide support.
+        </p>
+
+        <br>
+
+        <p>📞 Emergency assistance</p>
+
+        <p>🏥 Healthcare and medical support</p>
+
+        <p>👮 Police and law enforcement</p>
+
+        <p>🏠 Shelter and safe accommodation</p>
+
+        <p>💬 Counselling and emotional support</p>
+
+    </section>
+
+
+    <!-- SAFE PLACES -->
+
+    <section class="section" id="places">
+
+        <h2>Safe Places</h2>
+
+        <p>
+            In the full version, SafeHaven will use your location
+            to identify nearby verified support locations.
+        </p>
+
+        <br>
+
+        <button class="submit-btn" onclick="findLocation()">
+            📍 Find Nearby Help
+        </button>
+
+        <p id="locationResult"></p>
+
+    </section>
+
+
+    <!-- INCIDENT REPORT -->
+
+    <section class="section" id="report">
+
+        <h2>Document an Incident</h2>
+
+        <p>
+            Your information should remain private and should only
+            be shared when you choose to do so.
+        </p>
+
+        <br>
+
+        <label>Incident type</label>
+
+        <select id="incidentType">
+
+            <option>Verbal abuse</option>
+
+            <option>Physical violence</option>
+
+            <option>Sexual violence</option>
+
+            <option>Harassment</option>
+
+            <option>Stalking</option>
+
+            <option>Other</option>
+
+        </select>
+
+
+        <label>What happened?</label>
+
+        <textarea
+            id="incidentDescription"
+            placeholder="Describe what happened...">
+        </textarea>
+
+
+        <button class="submit-btn" onclick="saveReport()">
+            Save Incident
+        </button>
+
+    </section>
+
+
+    <!-- SAFETY EDUCATION -->
+
+    <section class="section">
+
+        <h2>Safety Information</h2>
+
+        <p>
+            If you or someone else is in immediate danger,
+            seek emergency assistance.
+        </p>
+
+        <br>
+
+        <p>
+            Do not confront an abuser if doing so could put you
+            or another person at greater risk.
+        </p>
+
+        <br>
+
+        <p>
+            When possible, keep important evidence and document
+            incidents in a secure location.
+        </p>
+
+    </section>
+
+</div>
+
+
+<footer>
+
+    <p>
+        SafeHaven — Technology for safer communities.
+    </p>
+
+    <p>
+        Privacy-first • Discreet • Community-focused
+    </p>
+
+</footer>
+
+
+<script>
+
+    function emergencyHelp() {
+
+        alert(
+            "Emergency assistance selected.\n\n" +
+            "The full SafeHaven app will connect you to " +
+            "appropriate emergency services and trusted contacts."
+        );
+
+    }
+
+
+    function showSupport() {
+
+        document
+            .getElementById("support")
+            .scrollIntoView({
+                behavior: "smooth"
+            });
+
+    }
+
+
+    function showSafePlaces() {
+
+        document
+            .getElementById("places")
+            .scrollIntoView({
+                behavior: "smooth"
+            });
+
+    }
+
+
+    function showReport() {
+
+        document
+            .getElementById("report")
+            .scrollIntoView({
+                behavior: "smooth"
+            });
+
+    }
+
+
+    function showContacts() {
+
+        alert(
+            "Trusted Contacts\n\n" +
+            "The full version will allow users to " +
+            "securely add and contact trusted people."
+        );
+
+    }
+
+
+    function findLocation() {
+
+        const result =
+            document.getElementById("locationResult");
+
+        if (navigator.geolocation) {
+
+            navigator.geolocation.getCurrentPosition(
+
+                function(position) {
+
+                    result.innerHTML =
+                        "<br>📍 Location detected.<br>" +
+                        "The full version will display " +
+                        "verified support services near you.";
+
+                },
+
+                function() {
+
+                    result.innerHTML =
+                        "<br>Location access was not granted.";
+
+                }
+
+            );
+
+        } else {
+
+            result.innerHTML =
+                "<br>Location services are not supported.";
+
+        }
+
+    }
+
+
+    function saveReport() {
+
+        const type =
+            document.getElementById("incidentType").value;
+
+        const description =
+            document.getElementById("incidentDescription").value;
+
+        if (description.trim() === "") {
+
+            alert(
+                "Please provide a description before saving."
+            );
+
+            return;
+
+        }
+
+        alert(
+            "Incident recorded locally.\n\n" +
+            "Type: " + type +
+            "\n\nYour information should remain private."
+        );
+
+    }
+
+
+    function quickExit() {
+
+        window.location.href =
+            "https://www.google.com";
+
+    }
+
+</script>
+
+</body>
+</html>
